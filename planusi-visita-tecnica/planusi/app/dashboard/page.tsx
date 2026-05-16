@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { Search, Plus } from "lucide-react";
 import Header from "@/components/Header";
@@ -17,6 +18,7 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
   const [fetchError, setFetchError] = useState<string | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const supabase = createClient();
@@ -25,11 +27,18 @@ export default function DashboardPage() {
       const {
         data: { user },
       } = await supabase.auth.getUser();
+
+      if (!user) {
+        router.replace("/login");
+        return;
+      }
+
       setUser(user);
 
       const { data, error } = await supabase
         .from("relatorios_visita")
         .select("*")
+        .eq("elaborado_por", user!.id)
         .order("sequencial", { ascending: false });
 
       if (error) {
