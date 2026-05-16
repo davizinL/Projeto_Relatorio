@@ -2,7 +2,13 @@
   "permissions": {
     "allow": [
       "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\Gravatá\\\\Documents\\\\Planusi\\\\Projeto_Relatorio\\\\planusi-visita-tecnica\" -Force)",
-      "Bash(Select-Object Name, PSIsContainer)"
+      "Bash(Select-Object Name, PSIsContainer)",
+      "Bash(Get-ChildItem -Recurse -Path \"c:\\\\Users\\\\Gravatá\\\\Documents\\\\Planusi\\\\Projeto_Relatorio\\\\planusi-visita-tecnica\\\\planusi\\\\app\" -Filter \"*.ts\" -o Name)",
+      "Bash(Select-Object -First 20)",
+      "Bash(git config *)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\Gravatá\\\\Documents\\\\Planusi\\\\Projeto_Relatorio\\\\planusi-visita-tecnica\\\\planusi\" -File)",
+      "Bash(Select-Object Name)",
+      "Bash(xargs grep -l \"relatorios_visita\\\\|RLS\\\\|row.*level.*security\")"
     ]
   }
 }
