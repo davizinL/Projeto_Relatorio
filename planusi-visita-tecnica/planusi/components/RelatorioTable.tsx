@@ -1,3 +1,4 @@
+import { Trash2 } from "lucide-react";
 import type { Relatorio } from "@/types";
 import { formatNumero } from "@/lib/utils";
 
@@ -5,11 +6,12 @@ interface Props {
   relatorios: Relatorio[];
   loading?: boolean;
   userNames: Record<string, string>;
+  onDelete?: (id: string) => void;
 }
 
-const COLUMNS = ["Nº", "Data", "Cliente", "OS", "Elaborado Por"];
+const COLUMNS = ["Nº", "Data", "Cliente", "OS", "Elaborado Por", ""];
 
-export default function RelatorioTable({ relatorios, loading, userNames }: Props) {
+export default function RelatorioTable({ relatorios, loading, userNames, onDelete }: Props) {
   function resolveElaboradoPor(uuid: string): string {
     return userNames[uuid] ?? uuid.slice(0, 8) + "…";
   }
@@ -34,13 +36,13 @@ export default function RelatorioTable({ relatorios, loading, userNames }: Props
           <tbody>
             {loading ? (
               <tr>
-                <td colSpan={5} className="text-center py-16 text-slate-400 text-sm">
+                <td colSpan={6} className="text-center py-16 text-slate-400 text-sm">
                   Carregando…
                 </td>
               </tr>
             ) : relatorios.length === 0 ? (
               <tr>
-                <td colSpan={5} className="text-center py-16 text-slate-400 dark:text-slate-500">
+                <td colSpan={6} className="text-center py-16 text-slate-400 dark:text-slate-500">
                   <div className="flex flex-col items-center gap-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -87,6 +89,17 @@ export default function RelatorioTable({ relatorios, loading, userNames }: Props
                   <td className="px-5 py-3 text-slate-600 dark:text-white whitespace-nowrap">{r.os || "—"}</td>
                   <td className="px-5 py-3 text-slate-600 dark:text-red-400 font-medium">
                     {r.elaborado_por ? resolveElaboradoPor(r.elaborado_por) : "—"}
+                  </td>
+                  <td className="px-3 py-3 text-right">
+                    {onDelete && (
+                      <button
+                        onClick={() => onDelete(r.id)}
+                        className="text-slate-400 hover:text-red-500 dark:hover:text-red-400 transition-colors"
+                        title="Apagar relatório"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    )}
                   </td>
                 </tr>
               ))
