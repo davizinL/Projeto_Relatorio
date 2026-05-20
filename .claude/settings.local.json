@@ -17,7 +17,12 @@
       "Read(//mnt/c/Users/davi.gravata/Documents/**)",
       "Bash(git add *)",
       "Bash(git commit *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "mcp__claude_ai_Vercel__list_teams",
+      "mcp__claude_ai_Vercel__list_projects",
+      "Bash(npm install *)",
+      "Bash(vercel --prod)",
+      "Bash(vercel login *)"
     ]
   }
 }
