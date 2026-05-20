@@ -38,7 +38,6 @@ export default function DashboardPage() {
       const { data, error } = await supabase
         .from("relatorios_visita")
         .select("*")
-        .eq("elaborado_por", user!.id)
         .order("sequencial", { ascending: false });
 
       if (error) {

@@ -87,7 +87,7 @@ export default function RelatorioTable({ relatorios, loading, userNames, onDelet
                   </td>
                   <td className="px-5 py-3 text-slate-700 dark:text-white">{r.cliente || "—"}</td>
                   <td className="px-5 py-3 text-slate-600 dark:text-white whitespace-nowrap">{r.os || "—"}</td>
-                  <td className="px-5 py-3 text-slate-600 dark:text-red-400 font-medium">
+                  <td className="px-5 py-3 text-slate-600 dark:text-white font-medium">
                     {r.elaborado_por ? resolveElaboradoPor(r.elaborado_por) : "—"}
                   </td>
                   <td className="px-3 py-3 text-right">
