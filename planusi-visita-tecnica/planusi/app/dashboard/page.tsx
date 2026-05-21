@@ -65,17 +65,6 @@ export default function DashboardPage() {
     init();
   }, []);
 
-  async function handleDelete(id: string) {
-    if (!confirm("Tem certeza que deseja apagar este relatório?")) return;
-    const supabase = createClient();
-    const { error } = await supabase.from("relatorios_visita").delete().eq("id", id);
-    if (error) {
-      alert("Não foi possível apagar o relatório.");
-      return;
-    }
-    setRelatorios((prev) => prev.filter((r) => r.id !== id));
-  }
-
   async function handleSave(form: NovoRelatorioForm) {
     const supabase = createClient();
 
@@ -167,7 +156,6 @@ export default function DashboardPage() {
           relatorios={filtered}
           loading={loading}
           userNames={userNames}
-          onDelete={handleDelete}
         />
       </main>
 
